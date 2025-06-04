@@ -49,6 +49,11 @@ int main (){
     printf("Enter your current gpa (Ex: 3.973): ");
     scanf("%lf", &gpa);
 
+    // User I/O for favorite hobbies
+    char favHobbies[50]; 
+    printf("Enter your favorite hobby (Reading, Learning languages, Dancing, etc.): ");
+    scanf(" %s", favHobbies);
+
     // User profile summary
     printf("This is your user profile: \n");
     printf("Full Name: %s %s\n", firstName, lastName);
@@ -61,6 +66,7 @@ int main (){
         printf("University Year: %s %s\n", universityLevel, universityYear);
     }
     printf("GPA: %.3f\n", gpa);
+    printf("Favorite Hobby: %s\n", favHobbies);
 
     return 0;
 }
