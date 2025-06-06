@@ -2,10 +2,34 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_STUDENTS 100
+
+typedef struct {
+    char name[100];
+    int age;
+    char schoolLevel[50];
+    double gpa;
+    char favHobbies[100];
+} Student;
+
 int main (){
     
     printf("Welcome to the User Profile App! \n");
-    
+
+    // printf("The maximum number of student profiles are %d\n", MAX_STUDENTS);
+
+    Student students[MAX_STUDENTS];
+
+    int numStudents;
+    printf("Enter the number of students: ");
+    scanf("%d", &numStudents);
+
+    /*
+    for (int i = 0; i < numStudents; i++) {
+        
+    }
+    */
+    /*
     // User I/O for full name
     char firstName[30];
     char lastName[30];
@@ -67,6 +91,7 @@ int main (){
     }
     printf("GPA: %.3f\n", gpa);
     printf("Favorite Hobby: %s\n", favHobbies);
+    */
 
     return 0;
 }
