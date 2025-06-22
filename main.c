@@ -2,15 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 #define MAX_STUDENTS 100
 
-
 typedef struct {
-   // char firstName[50];
-   // char lastName[50];
    char fullName[100];
    int age;
+   char gender[50];
    char schoolType[50];
    int gradeLevel;
    char schoolLevel[50];
@@ -23,29 +20,27 @@ int main (){
   
    printf("Welcome to the User Profile App! \n");
 
-
    Student students[MAX_STUDENTS];
-
 
    int numStudents;
    printf("Enter the number of students: ");
    scanf("%d", &numStudents);
    getchar();
 
-
    for (int i = 0; i < numStudents; i++) {
        printf("\n----- Student %d -----\n", i + 1);
-       // getchar();
-
 
        printf("Enter your full name: ");
        fgets(students[i].fullName, sizeof(students[i].fullName), stdin);
        students[i].fullName[strcspn(students[i].fullName, "\n")] = '\0';
 
-
        printf("Enter your age: ");
-       scanf(" %d", &students[i].age);
+       scanf("%d", &students[i].age);
+       getchar();
 
+       printf("Enter your gender: ");
+       fgets(students[i].gender, sizeof(students[i].gender), stdin);
+       students[i].gender[strcspn(students[i].schoolLevel, "\n")] = '\0';
 
        printf("Enter your school type (K-12, College, University): ");
        scanf(" %s", students[i].schoolType);
@@ -69,20 +64,19 @@ int main (){
        scanf("%lf", &students[i].gpa);
        getchar();
 
-
        printf("Enter your favorite hobbies: ");
        fgets(students[i].favHobbies, sizeof(students[i].favHobbies), stdin);
        students[i].favHobbies[strcspn(students[i].favHobbies, "\n")] = '\0';
+
    }
 
-
    printf("\n----- Student Profiles -----\n");
-
 
    int i;
    for (i = 0; i < numStudents; i++) {
        printf("Full Name: %s\n", students[i].fullName);
        printf("Age: %d\n", students[i].age);
+       printf("Gender: %s\n", students[i].gender);
        printf("School Type: %s\n", students[i].schoolType);
        if (strcmp(students[i].schoolType, "K-12") == 0) {
            printf("Grade Level: %d\n", students[i].gradeLevel);
