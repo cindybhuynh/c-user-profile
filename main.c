@@ -39,8 +39,7 @@ int main (){
        getchar();
 
        printf("Enter your gender: ");
-       fgets(students[i].gender, sizeof(students[i].gender), stdin);
-       students[i].gender[strcspn(students[i].schoolLevel, "\n")] = '\0';
+       scanf(" %s", students[i].gender);
 
        printf("Enter your school type (K-12, College, University): ");
        scanf(" %s", students[i].schoolType);
@@ -74,7 +73,7 @@ int main (){
 
    int i;
    for (i = 0; i < numStudents; i++) {
-       printf("Full Name: %s\n", students[i].fullName);
+       printf("\nFull Name: %s\n", students[i].fullName);
        printf("Age: %d\n", students[i].age);
        printf("Gender: %s\n", students[i].gender);
        printf("School Type: %s\n", students[i].schoolType);
