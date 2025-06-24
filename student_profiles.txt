@@ -1,0 +1,17 @@
+----- Student Profiles -----
+
+Full Name: Cindy Huynh
+Age: 17
+Gender: Female
+School Type: College
+College Level: Freshman
+GPA: 3.98
+Favorite Hobbies: Dancing, Singing, Yoga
+
+Full Name: Ryan Huynh
+Age: 22
+Gender: Male
+School Type: University
+University Level: Sixth year
+GPA: 3.96
+Favorite Hobbies: Reading, Learning about AI, Cooking

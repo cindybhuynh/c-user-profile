@@ -26,7 +26,8 @@ int main (){
     scanf("%d", &numStudents);
     getchar();
 
-    for (int i = 0; i < numStudents; i++) {
+    int i;
+    for (i = 0; i < numStudents; i++) {
         printf("\n----- Student %d -----\n", i + 1);
 
         printf("Enter your full name: ");
@@ -85,6 +86,32 @@ int main (){
         // Add the rest of the user input in the summary here
     }
 
+    FILE *file = fopen("student_profiles.txt", "w");
+    if (file == NULL) {
+            printf("Error opening file.\n");
+            return 1;
+    }
+
+    fprintf(file, "----- Student Profiles -----\n");
+
+    for (i = 0; i < numStudents; i++) {
+        fprintf(file, "\nFull Name: %s\n", students[i].fullName);
+        fprintf(file, "Age: %d\n", students[i].age);
+        fprintf(file, "Gender: %s\n", students[i].gender);
+        fprintf(file, "School Type: %s\n", students[i].schoolType);
+        if (strcmp(students[i].schoolType, "K-12") == 0) {
+            fprintf(file, "Grade Level: %d\n", students[i].gradeLevel);
+        } else if (strcmp(students[i].schoolType, "College") == 0) {
+            fprintf(file, "College Level: %s\n", students[i].schoolLevel);
+        } else if (strcmp(students[i].schoolType, "University") == 0) {
+            fprintf(file, "University Level: %s\n", students[i].schoolLevel);
+        }
+        fprintf(file, "GPA: %.2f\n", students[i].gpa);
+        fprintf(file, "Favorite Hobbies: %s\n", students[i].favHobbies);
+        // Add the rest of the user input in the summary here
+    }
+
+    fclose(file);
 
     return 0;
 }
