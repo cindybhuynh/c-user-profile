@@ -37,7 +37,7 @@ int main (){
     }
 
     fclose(fp);
-    printf("Existing student data has been printed.\n")
+    printf("Existing student data has been printed.\n");
 
     printf("Enter the number of students: ");
     scanf("%d", &numStudents);
