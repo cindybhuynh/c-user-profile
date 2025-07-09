@@ -1,6 +1,14 @@
 # .gitignore
+# Ignore GCC default binary 
+a.out
+
+# Ignore compiled executables
 *.out
-*.o
 *.exe
-main
+
+# Ignore object files
+*.o
+
+# Ignore editor configurations
 .vscode/
+*.swp

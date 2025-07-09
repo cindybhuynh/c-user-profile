@@ -22,6 +22,23 @@ int main (){
     Student students[MAX_STUDENTS];
 
     int numStudents;
+
+    FILE *fp = fopen("student_profiles.txt", "r");
+    
+    if (fp == NULL) {
+        printf("No existing student data. Starting fresh.\n");
+    }
+
+    if (fp != NULL) {
+        char line[512];
+        while (fgets(line, sizeof(line), fp)) {
+            // Finish this! sscanf(line, )
+        }
+    }
+
+    fclose(fp);
+    printf("Existing student data has been printed.\n")
+
     printf("Enter the number of students: ");
     scanf("%d", &numStudents);
     getchar();
@@ -83,7 +100,6 @@ int main (){
         }
         printf("GPA: %.2f\n", students[i].gpa);
         printf("Favorite Hobbies: %s\n", students[i].favHobbies);
-        // Add the rest of the user input in the summary here
     }
 
     FILE *file = fopen("student_profiles.txt", "w");
@@ -108,7 +124,6 @@ int main (){
         }
         fprintf(file, "GPA: %.2f\n", students[i].gpa);
         fprintf(file, "Favorite Hobbies: %s\n", students[i].favHobbies);
-        // Add the rest of the user input in the summary here
     }
 
     fclose(file);
