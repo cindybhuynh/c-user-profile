@@ -3,6 +3,7 @@
 a.out
 
 # Ignore compiled executables
+/bin/
 *.out
 *.exe
 
