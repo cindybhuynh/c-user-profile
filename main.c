@@ -15,13 +15,15 @@ typedef struct {
     char favHobbies[150];
 } Student;
 
-
 int main (){
     printf("Welcome to the User Profile App! \n");
 
     Student students[MAX_STUDENTS];
 
-    int numStudents;
+    int numStudents = 0;
+    int newStudents = 0;
+
+    // Check if the file exists and read existing student data
 
     FILE *fp = fopen("student_profiles.txt", "r");
     
@@ -32,59 +34,86 @@ int main (){
     if (fp != NULL) {
         char line[512];
         while (fgets(line, sizeof(line), fp)) {
-            // Finish this! sscanf(line, )
+            if (strncmp(line, "Full Name:", 10) == 0) {
+                sscanf(line, "Full Name: %s", students[numStudents].fullName);
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "Age: %d", &students[numStudents].age);
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "Gender: %s", students[numStudents].gender);
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "School Type: %s", students[numStudents].schoolType);
+                
+                if (strcmp(students[numStudents].schoolType, "K-12") == 0) {
+                    fgets(line, sizeof(line), fp);
+                    sscanf(line, "Grade Level: %d", &students[numStudents].gradeLevel);
+                } else if (strcmp(students[numStudents].schoolType, "College") == 0) {
+                    fgets(line, sizeof(line), fp);
+                    sscanf(line, "College Level: %s", students[numStudents].schoolLevel);
+                } else if (strcmp(students[numStudents].schoolType, "University") == 0) {
+                    fgets(line, sizeof(line), fp);
+                    sscanf(line, "University Level: %s", students[numStudents].schoolLevel);
+                }
+                
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "GPA: %lf", &students[numStudents].gpa);
+                fgets(line, sizeof(line), fp);
+                sscanf(line, "Favorite Hobbies: %s", students[numStudents].favHobbies);
+                
+                numStudents++; // moves to the next student
+            }
         }
+        fclose(fp);
+        printf("%d existing student(s) loaded\n", numStudents);
     }
 
-    fclose(fp);
-    printf("Existing student data has been printed.\n");
-
-    printf("Enter the number of students: ");
-    scanf("%d", &numStudents);
+    printf("How many new students do you want to add? ");
+    scanf("%d", &newStudents);
     getchar();
 
     int i;
-    for (i = 0; i < numStudents; i++) {
+    for (i = 0; i < newStudents; i++) {
+        int idx = numStudents + i;
+
         printf("\n----- Student %d -----\n", i + 1);
 
         printf("Enter your full name: ");
-        fgets(students[i].fullName, sizeof(students[i].fullName), stdin);
-        students[i].fullName[strcspn(students[i].fullName, "\n")] = '\0';
+        fgets(students[idx].fullName, sizeof(students[idx].fullName), stdin);
+        students[idx].fullName[strcspn(students[idx].fullName, "\n")] = '\0';
 
         printf("Enter your age: ");
-        scanf("%d", &students[i].age);
+        scanf("%d", &students[idx].age);
         getchar();
 
         printf("Enter your gender: ");
-        scanf(" %s", students[i].gender);
+        scanf(" %s", students[idx].gender);
 
         printf("Enter your school type (K-12, College, University): ");
-        scanf(" %s", students[i].schoolType);
+        scanf(" %s", students[idx].schoolType);
         
-        if (strcmp(students[i].schoolType, "K-12") == 0) {
+        if (strcmp(students[idx].schoolType, "K-12") == 0) {
             printf("Enter your grade level (Ex: 9, 10, 11, 12, etc.): ");
-            scanf("%d", &students[i].gradeLevel);
-        } else if (strcmp(students[i].schoolType, "College") == 0) {
+            scanf("%d", &students[idx].gradeLevel);
+        } else if (strcmp(students[idx].schoolType, "College") == 0) {
             printf("Enter your college level (Ex: Freshman, Sophomore, etc.): ");
-            scanf("%s", students[i].schoolLevel);
-        } else if (strcmp(students[i].schoolType, "University") == 0) {
+            scanf("%s", students[idx].schoolLevel);
+        } else if (strcmp(students[idx].schoolType, "University") == 0) {
             getchar();
             printf("Enter your university level (Ex: First year, Second year, etc.): ");
-            fgets(students[i].schoolLevel, sizeof(students[i].schoolLevel), stdin);
-            students[i].schoolLevel[strcspn(students[i].schoolLevel, "\n")] = '\0';
+            fgets(students[idx].schoolLevel, sizeof(students[idx].schoolLevel), stdin);
+            students[idx].schoolLevel[strcspn(students[idx].schoolLevel, "\n")] = '\0';
         } else {
             printf("Invalid school type. Enter a valid school type.\n");
         }
         
         printf("Enter your gpa: ");
-        scanf("%lf", &students[i].gpa);
+        scanf("%lf", &students[idx].gpa);
         getchar();
 
         printf("Enter your favorite hobbies: ");
-        fgets(students[i].favHobbies, sizeof(students[i].favHobbies), stdin);
-        students[i].favHobbies[strcspn(students[i].favHobbies, "\n")] = '\0';
+        fgets(students[idx].favHobbies, sizeof(students[idx].favHobbies), stdin);
+        students[idx].favHobbies[strcspn(students[idx].favHobbies, "\n")] = '\0';
     }
-
+    /*
     printf("\n----- Student Profiles -----\n");
     for (i = 0; i < numStudents; i++) {
         printf("\nFull Name: %s\n", students[i].fullName);
@@ -101,32 +130,33 @@ int main (){
         printf("GPA: %.2f\n", students[i].gpa);
         printf("Favorite Hobbies: %s\n", students[i].favHobbies);
     }
+    */
 
-    FILE *file = fopen("student_profiles.txt", "w");
-    if (file == NULL) {
+    numStudents += newStudents;
+    fp = fopen("student_profiles.txt", "w");
+    if (fp == NULL) {
             printf("Error opening file.\n");
             return 1;
     }
 
-    fprintf(file, "----- Student Profiles -----\n");
+    fprintf(fp, "----- Student Profiles -----\n");
 
     for (i = 0; i < numStudents; i++) {
-        fprintf(file, "\nFull Name: %s\n", students[i].fullName);
-        fprintf(file, "Age: %d\n", students[i].age);
-        fprintf(file, "Gender: %s\n", students[i].gender);
-        fprintf(file, "School Type: %s\n", students[i].schoolType);
+        fprintf(fp, "\nFull Name: %s\n", students[i].fullName);
+        fprintf(fp, "Age: %d\n", students[i].age);
+        fprintf(fp, "Gender: %s\n", students[i].gender);
+        fprintf(fp, "School Type: %s\n", students[i].schoolType);
         if (strcmp(students[i].schoolType, "K-12") == 0) {
-            fprintf(file, "Grade Level: %d\n", students[i].gradeLevel);
+            fprintf(fp, "Grade Level: %d\n", students[i].gradeLevel);
         } else if (strcmp(students[i].schoolType, "College") == 0) {
-            fprintf(file, "College Level: %s\n", students[i].schoolLevel);
+            fprintf(fp, "College Level: %s\n", students[i].schoolLevel);
         } else if (strcmp(students[i].schoolType, "University") == 0) {
-            fprintf(file, "University Level: %s\n", students[i].schoolLevel);
+            fprintf(fp, "University Level: %s\n", students[i].schoolLevel);
         }
-        fprintf(file, "GPA: %.2f\n", students[i].gpa);
-        fprintf(file, "Favorite Hobbies: %s\n", students[i].favHobbies);
+        fprintf(fp, "GPA: %.2f\n", students[i].gpa);
+        fprintf(fp, "Favorite Hobbies: %s\n", students[i].favHobbies);
     }
-
-    fclose(file);
+    fclose(fp);
 
     return 0;
 }
