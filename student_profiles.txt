@@ -1,17 +1,46 @@
 ----- Student Profiles -----
 
-Full Name: Cindy Huynh
+Full Name: Cindy
 Age: 17
 Gender: Female
 School Type: College
 College Level: Freshman
-GPA: 3.98
-Favorite Hobbies: Dancing, Reading, Coding
+Major: 
+GPA: 0.00
+Favorite Hobbies: 
 
-Full Name: Ryan Huynh
+Full Name: Ryan
 Age: 22
 Gender: Male
 School Type: University
-University Level: Sixth year
-GPA: 3.87
-Favorite Hobbies: Reading, Cooking, Programming
+University Level: Sixth
+Major: 
+GPA: 0.00
+Favorite Hobbies: 
+
+Full Name: John
+Age: 20
+Gender: Male
+School Type: University
+University Level: Second
+Major: 
+GPA: 0.00
+Favorite Hobbies: 
+
+Full Name: Paul Allen
+Age: 21
+Gender: Male
+School Type: University
+University Level: Third year
+Major: 
+GPA: 0.00
+Favorite Hobbies: Reading, Walking, Sleeping
+
+Full Name: Carol Sky
+Age: 20
+Gender: Female
+School Type: University
+University Level: Third year
+Major: Chemical Engineering
+GPA: 3.98
+Favorite Hobbies: Cooking, Learning Languages, Working Out
